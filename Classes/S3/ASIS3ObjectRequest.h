@@ -13,6 +13,7 @@
 // Constants for storage class
 extern NSString *const ASIS3StorageClassStandard;
 extern NSString *const ASIS3StorageClassReducedRedundancy;
+extern NSString *const ASIS3ServerSideEncryptionAES256;
 
 @interface ASIS3ObjectRequest : ASIS3Request {
 
@@ -39,6 +40,9 @@ extern NSString *const ASIS3StorageClassReducedRedundancy;
 	// Set this to ASIS3StorageClassReducedRedundancy to save money on storage, at (presumably) a slightly higher risk you will lose the data
 	// If this is not set, no x-amz-storage-class header will be sent to S3, and their default will be used
 	NSString *storageClass;
+    
+    // for new server-side encryption (10/5/2011)
+    NSString *serverSideEncryption;
 }
 
 // Create a request, building an appropriate url
@@ -77,4 +81,5 @@ extern NSString *const ASIS3StorageClassReducedRedundancy;
 @property (retain, nonatomic) NSString *mimeType;
 @property (retain, nonatomic) NSString *subResource;
 @property (retain, nonatomic) NSString *storageClass;
+@property (retain, nonatomic) NSString *serverSideEncryption;
 @end
