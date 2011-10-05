@@ -10,6 +10,7 @@
 
 NSString *const ASIS3StorageClassStandard = @"STANDARD";
 NSString *const ASIS3StorageClassReducedRedundancy = @"REDUCED_REDUNDANCY";
+NSString *const ASIS3ServerSideEncryptionAES256 = @"AES256";
 
 @implementation ASIS3ObjectRequest
 
@@ -89,6 +90,7 @@ NSString *const ASIS3StorageClassReducedRedundancy = @"REDUCED_REDUNDANCY";
 	[newRequest setMimeType:[self mimeType]];
 	[newRequest setSubResource:[self subResource]];
 	[newRequest setStorageClass:[self storageClass]];
+    [newRequest setServerSideEncryption:[self serverSideEncryption]];
 	return newRequest;
 }
 
@@ -101,6 +103,7 @@ NSString *const ASIS3StorageClassReducedRedundancy = @"REDUCED_REDUNDANCY";
 	[sourceBucket release];
 	[subResource release];
 	[storageClass release];
+    [serverSideEncryption release];
 	[super dealloc];
 }
 
@@ -142,6 +145,9 @@ NSString *const ASIS3StorageClassReducedRedundancy = @"REDUCED_REDUNDANCY";
 	if ([self storageClass]) {
 		[headers setObject:[self storageClass] forKey:@"x-amz-storage-class"];
 	}
+	if ([self serverSideEncryption]) {
+		[headers setObject:[self serverSideEncryption] forKey:@"x-amz-server-side-encryption"];
+	}
 	return headers;
 }
 
@@ -161,4 +167,5 @@ NSString *const ASIS3StorageClassReducedRedundancy = @"REDUCED_REDUNDANCY";
 @synthesize mimeType;
 @synthesize subResource;
 @synthesize storageClass;
+@synthesize serverSideEncryption;
 @end
